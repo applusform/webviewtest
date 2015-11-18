@@ -15,12 +15,12 @@
 				log("Found localStorage object.");
 				log("Reading saved date from localStorage...");
 				var lastDate = localStorage.lastDate;
+				localStorage.lastDate = date;
 				if (typeof (lastDate) == "undefined" || lastDate == null || lastDate == "") {
 					log("Warning: saved lastDate value is not found. Please refresh page.");
 				} else {
 					log("Found saved lastDate value.");
 					document.getElementById("lastDate").innerHTML = lastDate;
-					localStorage.lastDate = date;
 					log("End test()");
 				}
 			}
