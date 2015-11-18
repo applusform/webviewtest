@@ -12,6 +12,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
 	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"> </script>
 	<script type="text/javascript">
 
 
@@ -29,7 +30,29 @@
 			"G01",
 			"H01",
 			"I01",
-			];
+		];
+
+		// increase mVer when test item modified or deleted. (not added);
+		var mVer = 3;
+		function onInit() {
+			if (typeof (localStorage) != "undefined") {
+				if (localStorage.mVer) {
+					if (localStorage.mVer != mVer) {
+						localStorage.mVer = mVer;
+						if (confirm("Some Tests are modified or delete.\nReset all test result?")) {
+							reset();
+						}
+					}
+				} else {
+					// first time
+					localStorage.mVer = mVer;
+					reset();
+				}
+			}
+
+			showTestResult();
+		}
+
 		function showTestResult() {
 
 			var i;
@@ -66,23 +89,37 @@
 			var passed = document.getElementById("passed");
 			passed.innerHTML = parseInt(((pass) / (total - na) * 1000), 10) / 10 + "% (" + (pass) + "/" + (total - na) + ")";
 		}
+
 		function reset() {
-			if (confirm("Delete all test results.\nAre you sure?")) {
-				var i;
-				var total = tests.length;
-				for (i = 0; i < total; ++i) {
-					localStorage.removeItem(tests[i]);
-					//eval("localStorage." + tests[i] + "= null");
+			var i;
+			var total = tests.length;
+			for (i = 0; i < total; ++i) {
+				var id = tests[i];
+				localStorage.removeItem(id);
+				var passFail = getDefault(id);
+				if (passFail != null) {
+					eval("localStorage." + id + "= '" + passFail + "'");
 				}
+
+				//eval("localStorage." + tests[i] + "= null");
+			}
+		}
+
+		function resetConfirm() {
+			if (confirm("Delete all test results.\nAre you sure?")) {
+				reset();
 				showTestResult();
 			}
 		}
+
+		// prevent auto header
+		document.useCustomHeader = true;
 	</script>
 </head>
-<body onload="showTestResult()">
+<body onload="onInit()">
 	<h3>HybridApp WebView Test <span class="note"> for Android, iOS</span>
 	<div class="note" style="text-align :right">
-		rev 2. 2015/11/18
+		rev 3. 2015/11/18
 	</div>
 	</h3>
 	<hr/>
@@ -134,7 +171,7 @@
 	
 	<br />
 	<div class="result">
-	- Passed : <span class="emp1" id="passed"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="reset()">reset</button><br /> 
+	- Passed : <span class="emp1" id="passed"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="resetConfirm()">reset</button><br /> 
 	- Coverage : <span class="emp1" id="coverage"></span> <br />
 	- Total : <span class="emp1" id="totalCount"></span> <br />
 	<br />

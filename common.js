@@ -128,7 +128,8 @@ function updatePassFailStatus(id) {
 }
 
 function onDOMContentLoaded() {
-    addHeader();
+    if (!document.useCustomHeader)
+        addHeader();
 
     if (typeof (test) == "function") {
         window.setTimeout(function () {
