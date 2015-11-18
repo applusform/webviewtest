@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Basic Information</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<script type="text/javascript" src="common.js"></script>
+
+	<style>
+		ul {padding-left:20px;}
+		li {margin-bottom:10px;}
+	</style>
+
+	<script type="text/javascript">
+		function _test() {
+			printLogTime = false;
+			var cmds = [
+				"navigator.appName",
+				"navigator.appCodeName",
+				"navigator.appVersion",
+				"navigator.userAgent",
+				"navigator.platform",
+				"navigator.product",
+				"navigator.language",
+				"navigator.onLine",
+				"navigator.cookieEnabled",
+				"navigator.javaEnabled()",
+			];
+
+			for (var i = 0; i < cmds.length; ++i) {
+				var cmd = cmds[i];
+				log(cmd +": " + eval(cmd));
+			}
+		}
+	</script>
+</head>
+<body>
+	<h4>navigator properties</h4>
+	<ul>
+		<li>appName : <script type="text/javascript">document.write(navigator.appName)</script></li>
+		<li>appCodeName : <script type="text/javascript">document.write(navigator.appCodeName)</script></li>
+		<li>appVersion : <br /><script type="text/javascript">document.write(navigator.appVersion)</script></li>
+		<li>userAgent : <br /><script type="text/javascript">document.write(navigator.userAgent)</script></li>
+		<li>platform : <script type="text/javascript">document.write(navigator.platform)</script></li>
+		<li>product : <script type="text/javascript">document.write(navigator.product)</script></li>
+		<li>language : <script type="text/javascript">document.write(navigator.language)</script></li>
+		<li>onLine : <script type="text/javascript">document.write(navigator.onLine)</script></li>
+		<li>cookieEnabled : <script type="text/javascript">document.write(navigator.cookieEnabled)</script></li>
+		<li>javaEnabled() :<script type="text/javascript">document.write(navigator.javaEnabled())</script></li>
+	</ul>
+</body>
+</html>

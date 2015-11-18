@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Alert Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		function test_Alert() {
+			log("Start test_Alert()");
+
+			var startDate = new Date();
+			try {
+				alert("Can you see this?");
+				var endDate = new Date();
+
+				var diff = endDate - startDate;
+
+				if (diff < 100) {
+					log("Error : alert dialog is not shown or it does not support blocking mode.");
+				} else {
+					log("End test_Alert()");
+				}
+			} catch (e) {
+				log("Error : " + e.message);
+			}
+		}
+
+		function test_Confirm() {
+			log("Start test_Confirm()");
+
+			var startDate = new Date();
+			try {
+				var result = false;
+				if (confirm("Can you see this?")) {
+					result = true;
+				}
+				var endDate = new Date();
+
+				var diff = endDate - startDate;
+
+				if (diff < 100) {
+					log("Error : confirm dialog is not shown or it does not support blocking mode.");
+				} else {
+					log("Confirm result : " + result);
+					log("End test_Confirm()");
+				}
+			} catch (e) {
+				log("Error : " + e.message);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">E01. Alert</span>
+			<div id="E01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<button onclick="test_Alert()" >alert()</button>
+		</div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">E02. Confirm</span>
+			<div id="E02" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<button onclick="test_Confirm()" >confirm()</button>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Video Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		function test() {
+		}
+
+		var isFullScreen = false;
+		function fullScreen() {
+			var video = document.getElementById("myvideo");
+			if (video.requestFullscreen) {
+				log("Found video.requestFullscreen() function");
+				video.requestFullscreen();
+			} else if (video.mozRequestFullScreen) {
+				log("Found video.mozRequestFullScreen() function");
+				video.mozRequestFullScreen();
+			} else if (video.webkitRequestFullscreen) {
+				log("Found video.webkitRequestFullscreen() function");
+				video.webkitRequestFullscreen();
+			} else if (video.webkitEnterFullscreen) {
+				log("Found video.webkitEnterFullscreen() function");
+				video.webkitEnterFullscreen();
+			} else {
+				log("Error : can't find 'video.requestFullScreen' function");
+				return;
+			}
+
+			document.addEventListener("webkitfullscreenchange", function () {
+				if (!isFullScreen) {
+					isFullScreen = true;
+					log("webkitfullscreenchange event is detected.");
+				}
+			});
+
+			video.addEventListener("webkitbeginfullscreen", function () {
+				if (!isFullScreen) {
+					isFullScreen = true;
+					log("webkitbeginfullscreen event is detected.");
+				}
+			});
+
+			window.setTimeout(function () {
+				if (isFullScreen)
+					log("Success to Switch full screen.");
+				else
+					log("Error : fail to request full screen.");
+			}, 1000);
+			video.play();
+		}
+
+		function videoError(event) {
+			var video = document.getElementById("myvideo");
+			log("Error: " + video.error.code);
+		}
+	</script>
+</head>
+<body>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">D01. Inline play</span>
+			<div id="D01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<video width="280" height="200" controls id="myvideo" webkit-playsinline src="http://mospi.org/moml/dev/momlapi/video/moml.mp4"
+				onerror="videoError(event)">
+			</video>
+		</div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">D02. Full screen play</span>
+			<div id="D02" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<button onclick="fullScreen()">
+				Full Screen</button>
+		</div>
+	</div>
+</body>
+</html>

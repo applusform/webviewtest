@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Vibration Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		function test() {
+			vibrate(2000);
+		}
+
+		function vibrate(pattern) {
+			if (navigator.vibrate) {
+				var millis = 0;
+				if (typeof (pattern) == "number") {
+					millis = pattern;
+					log("Vibrate " + millis + " milliseconds.");
+				} else {
+					for (var i = 0; i < pattern.length; ++i) {
+						millis += pattern[i];
+					}
+					log("Vibrate patterns (total " + millis + " milliseconds).");
+				}
+				navigator.vibrate(pattern);
+				window.setTimeout(function () {
+					log("End vibration.");
+				}, millis);
+			}
+			else {
+				log("Error : can't find 'navigator.vibrate' function");
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">I01. vibrate</span>
+			<div id="I01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent" >
+			<p>
+				<button onclick="vibrate(2000)" >Vibrate 2 sec</button>
+				<button onclick="vibrate([50, 50, 50, 50, 200, 100, 100, 200, 300, 400,])" >Vibrate patterns</button>
+			</p>
+		</div>
+		<div class="note"><span class="noteTitle">Note: </span>N/A in below Android 4.4 or iOS. </div>
+	</div>
+	
+</body>
+</html>

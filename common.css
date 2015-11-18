@@ -1,0 +1,13 @@
+ul {padding-left:20px;}
+li {margin-bottom:10px;}
+.passFail {float:right;background:#ffff80;width:50px;text-align:center;border:1px solid #808000;font-weight:bold;font-size:15px;}
+.box1 {border:1px solid #eeeeee; padding:10px 4px;margin-bottom:-1px; }
+.item {display:inline-block;}
+.itemHeader {}
+.itemTitle {font-size:14px;font-weight:bold;}
+.itemContent {display:inline-block; margin-left:10px;}
+.subject1 {font-size:16px;font-weight:bold; }
+.note {font-size:11px;}
+.noteTitle {font-weight:bold; }
+.result {font-size:12px;}
+.emp1 {color:#0080ff; font-weight:bold;}

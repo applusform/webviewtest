@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>User Media Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+
+		navigator.getUserMedia = (navigator.getUserMedia ||
+                            navigator.webkitGetUserMedia ||
+                            navigator.mozGetUserMedia ||
+                            navigator.msGetUserMedia);
+
+
+		function test() {
+			log("Start test()");
+			if (navigator.getUserMedia) {
+				navigator.getUserMedia({ video: true, audio: true },
+					function (mediaStream) {
+						log("MediaStream : " + mediaStream.getTracks().length + " tracks(" + mediaStream.getAudioTracks().length + " audios, " + mediaStream.getVideoTracks().length + " videos).");
+						var vid = document.getElementById('camera-stream');
+						vid.src = window.URL.createObjectURL(mediaStream);
+						log("End test()");
+					},
+
+					function (err) {
+						log('Error: ' + err.name);
+					}
+				);
+
+			} else {
+				log("Error : can't find 'navigator.getUserMedia()' function");
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">H01. Audio/Video stream</span>
+			<div id="H01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent" style="width:100%">
+			<div id="video-container">
+				<video id="camera-stream" width="60%" autoplay>
+				</video>
+			</div>
+		</div>
+		<div class="note"><span class="noteTitle">Note: </span>N/A in below Android 5.0 or iOS. </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>File Upload Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+	<div class="subject1">
+		&lt;input type="file" &gt;</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">B01. General file</span>
+			<div id="B01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<input type="file"/></div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">B02. Image file</span>
+			<div id="B02" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<input type="file" accept="image/*"/></div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">B03. Audio file</span>
+			<div id="B03" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<input type="file" accept="audio/*"/></div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">B04. Video file</span>
+			<div id="B04" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<input type="file" accept="video/*"/></div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">B05. Image file or Camera</span>
+			<div id="B05" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<input type="file" accept="image/*" capture/></div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">B06. Multiple file</span>
+			<div id="B06" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<input type="file" multiple="true"/></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Local Storage Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		function test() {
+			log("Start test()");
+			var date = new Date();
+			document.getElementById("currentDate").innerHTML = date;
+			if (typeof (localStorage) != "undefined") {
+				log("Found localStorage object.");
+				log("Reading saved date from localStorage...");
+				var lastDate = localStorage.lastDate;
+				if (typeof (lastDate) == "undefined" || lastDate == null || lastDate == "") {
+					log("Warning: saved lastDate value is not found. Please refresh page.");
+				} else {
+					log("Found saved lastDate value.");
+					document.getElementById("lastDate").innerHTML = lastDate;
+					localStorage.lastDate = date;
+					log("End test()");
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">F01. Local storage</span>
+			<div id="F01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<p>
+				Last visited Date: <br /> <span id="lastDate">Unknown</span>
+			</p>
+			<p>
+				Current Date : <br /> <span id="currentDate">Unknown</span>
+			</p>
+			<p>
+				<button onclick="location.reload()" >Refresh page</button>
+			</p>
+		</div>
+	</div>
+
+</body>
+</html>

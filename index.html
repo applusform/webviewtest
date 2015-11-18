@@ -1,0 +1,148 @@
+﻿<!DOCTYPE HTML >
+<!--
+	Created by ApplusForm.com on 2015.11.13
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2015 ApplusForm.com. All rights reserved.
+-->
+<html>
+<head>
+	<title>WebView Test for Hybrid App</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript">
+
+
+		var tests = [
+			"A01", "A02", "A03", "A04", "A05", "A06", "A07",
+			"B01", "B02", "B03", "B04", "B05", "B06",
+			"C11", "C12", "C13", "C14",
+			"C21", "C22", "C23",
+			"C31", "C32",
+			"C41", 
+			"C51",
+			"D01", "D02",
+			"E01", "E02",
+			"F01",
+			"G01",
+			"H01",
+			"I01",
+			];
+		function showTestResult() {
+
+			var i;
+			var total = tests.length;
+			var pass = 0;
+			var fail = 0;
+			var na = 0;
+			var nt = 0;
+
+			for (i = 0; i < total; ++i) {
+				var passFail = eval("localStorage." + tests[i]);
+				if (passFail == "PASS")
+					++pass;
+				else if (passFail == "FAIL")
+					++fail;
+				else if (passFail == "NA")
+					++na;
+				else 
+					++nt;
+			}
+			document.getElementById("totalCount").innerHTML = total;
+			document.getElementById("passCount").innerHTML = pass;
+			document.getElementById("failCount").innerHTML = fail;
+			document.getElementById("ntCount").innerHTML = nt;
+			document.getElementById("naCount").innerHTML = na;
+
+			if (nt > 0) {
+				document.getElementById("ntCount").style.color = "#ff0000";
+			}
+
+
+			var coverage = document.getElementById("coverage");
+			coverage.innerHTML = parseInt(((pass + fail) / (total - na) * 1000), 10) / 10 + "% (" + (pass + fail) + "/" + (total - na) + ")";
+			var passed = document.getElementById("passed");
+			passed.innerHTML = parseInt(((pass) / (total - na) * 1000), 10) / 10 + "% (" + (pass) + "/" + (total - na) + ")";
+		}
+		function reset() {
+			if (confirm("Delete all test results.\nAre you sure?")) {
+				var i;
+				var total = tests.length;
+				for (i = 0; i < total; ++i) {
+					localStorage.removeItem(tests[i]);
+					//eval("localStorage." + tests[i] + "= null");
+				}
+				showTestResult();
+			}
+		}
+	</script>
+</head>
+<body onload="showTestResult()">
+	<h3>HybridApp WebView Test <span class="note"> for Android, iOS</span>
+	<div class="note" style="text-align :right">
+		rev 2. 2015/11/18
+	</div>
+	</h3>
+	<hr/>
+	<ul>
+		<li>
+			<a href="basicInfo.htm"> Basic information</a>
+		</li>
+		<li>
+			HTML Tags
+			<ul>
+				<li>
+					<a href="links.htm"> A. Links</a>
+				</li>
+				<li>
+					<a href="fileUpload.htm"> B. File upload</a>
+				</li>
+				<li>
+					<a href="fileDownload.htm"> C. File download</a>
+				</li>
+				<li>
+					<a href="video.htm">D. Video play</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			JavaScript Objects
+			<ul>
+				<li>
+					<a href="alert.htm"> E. Alert dialog</a>
+				</li>
+				<li>
+					<a href="localStorage.htm"> F. Local storage</a>
+				</li>
+				<li>
+					<a href="location.htm">G. Location</a>
+				</li>
+				<li>
+					<a href="userMedia.htm">H. User Media (Android 5.0)</a>
+				</li>
+				<li>
+					<a href="vibration.htm">I. Vibration (Android 4.4)</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+<hr />
+	Result: <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:showTestResult()" >refresh </a> --> 
+	
+	<br />
+	<div class="result">
+	- Passed : <span class="emp1" id="passed"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="reset()">reset</button><br /> 
+	- Coverage : <span class="emp1" id="coverage"></span> <br />
+	- Total : <span class="emp1" id="totalCount"></span> <br />
+	<br />
+	<div class="passFail" style="display:inline-block;float:none;background:#a0ff80;">PASS</div> : <span class="emp1" id="passCount"></span><br />
+	<div class="passFail" style="display:inline-block;float:none;background:#ffa0a0;">FAIL</div> : <span class="emp1" id="failCount"></span><br />
+	<div class="passFail" style="display:inline-block;float:none;background:#ffffa0;">N/T</div> : <span class="emp1" id="ntCount"></span> (Not Tested yet.)<br />
+	<div class="passFail" style="display:inline-block;float:none;background:#a0a0a0;">N/A</div> : <span class="emp1" id="naCount"></span> (Not Applicable on this device.)<br />
+	</div>
+
+</body>
+</html>

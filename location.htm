@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Location Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript">
+		var handled;
+		function test() {
+			handled = false;
+			log("Start test()");
+			if (navigator.geolocation) {
+				log("Finding current position...");
+				var timeOutSec = 30;
+				log("Please wait... (Timeout: " + timeOutSec  + " second).");
+				navigator.geolocation.getCurrentPosition(showPosition, function (e) { handled = true; log("Error: " + e.message) }, { timeout: timeOutSec * 1000 });
+
+				window.setTimeout(function () {
+					if (!handled) 
+						log("Error : Timeout.");
+				 }, (timeOutSec + 3) * 1000);
+			}
+			else {
+				log("Error : can't find 'navigator.geolocation' object");
+			}
+		}
+
+
+		function showPosition(position) {
+			handled = true;
+			log("Found location :  " + position.coords.latitude + ', ' + position.coords.longitude);
+			document.getElementById("location").innerHTML = position.coords.latitude + ', ' + position.coords.longitude;
+			googl(position.coords.latitude, position.coords.longitude);
+		}
+
+		function googl(num1, num2) {
+			var latlng = new google.maps.LatLng(num1, num2);
+			var geocoder = new google.maps.Geocoder();
+
+			log("Start geocoding...");
+			geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+
+				if (status == google.maps.GeocoderStatus.OK) {
+					var addresses = "";
+					for (var i = 0; i < results.length; ++i) {
+						addresses = addresses + "<br/>&nbsp;&nbsp;" + (i + 1) + " " + results[i].formatted_address;
+					}
+					log("Found " + results.length + " addresses." + addresses);
+
+
+					document.getElementById("address").innerHTML = results[0].formatted_address;
+				}
+				else {
+					log("Geocoder failed due to: " + status);
+				}
+				log("End test()");
+			});
+		}
+	</script>
+</head>
+<body>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">G01. Location</span>
+			<div id="G01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent">
+			<p>
+				Location: <br /> <span id="location">Unknown</span>
+			</p>
+			<p>
+				Address : <br /> <span id="address">Unknown</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
