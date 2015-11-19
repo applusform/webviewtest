@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Window open Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+
+		function onInit() {
+			setAutoTest("J01");
+			setAutoTest("J02");
+
+		}
+
+		function test() {
+
+		}
+
+		function testOpenNewWindow() {
+			localStorage.setItem("testOpenNewWindow", "ready");
+			window.setTimeout(function () {
+				checkTestOpenNewWindow();
+			}, 1000);
+
+			window.open("testOpenNewWindow.htm", "_blank");
+		}
+
+		function checkTestOpenNewWindow() {
+			var testOpenNewWindow = localStorage.getItem("testOpenNewWindow");
+			if (testOpenNewWindow == "ready") {
+				setAutoTestResult("J01", "FAIL");
+				updatePassFailStatus("J01");
+			}
+		}
+
+		function testReferrer() {
+			localStorage.setItem("testReferrer", document.location);
+			window.open("testReferrer.htm", "_blank");
+			window.setTimeout(function () {
+				updatePassFailStatus("J02");
+			}, 1000);
+		}
+
+		function vibrate(pattern) {
+			if (navigator.vibrate) {
+				var millis = 0;
+				if (typeof (pattern) == "number") {
+					millis = pattern;
+					log("Vibrate " + millis + " milliseconds.");
+				} else {
+					for (var i = 0; i < pattern.length; ++i) {
+						millis += pattern[i];
+					}
+					log("Vibrate patterns (total " + millis + " milliseconds).");
+				}
+				navigator.vibrate(pattern);
+				window.setTimeout(function () {
+					log("End vibration.");
+				}, millis);
+			}
+			else {
+				log("Error : can't find 'navigator.vibrate' function");
+				setAutoTestResult("I01", "FAIL");
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">J01. open new window</span>
+			<div id="J01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent" >
+			<p>
+				<button onclick="testOpenNewWindow()" >test open target="_blank"</button>
+			</p>
+		</div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">J02. referrer</span>
+			<div id="J02" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent" >
+			<p>
+				<button onclick="testReferrer()" >test document referrer</button>
+			</p>
+		</div>
+	</div>
+	<div class="guide">
+		<script type="text/javascript">
+			document.write(strEnKo("", "- 버튼을 클릭하면 테스트 페이지가 새로 열립니다.<br/>- 페이지를 닫고 다시 돌아오십시오."))
+		</script>
+	</div>	
+</body>
+</html>

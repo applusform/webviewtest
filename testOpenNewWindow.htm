@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Open New Window Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+		charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+
+		function onInit() {
+			var value = localStorage.getItem("testOpenNewWindow");
+			if (value == "ready") {
+				localStorage.removeItem("testOpenNewWindow");
+				setAutoTestResult("J01", "PASS");
+				log("Success: open new window.");
+			}
+		}
+	</script>
+</head>
+<body>
+	<p>Please close this page and continue test.</p>
+</body>
+</html>

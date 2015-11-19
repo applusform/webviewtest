@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Document referrer Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+		charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+
+		function onInit() {
+			var value = localStorage.getItem("testReferrer");
+			if (value != null && value.length > 0) {
+				log("Found: saved referrer value - " + value);
+				localStorage.removeItem("testReferrer");
+				if (typeof (document.referrer) != "undefined" && document.referrer != null && document.referrer.length > 0) {
+					log("Found: document.referrer - " + document.referrer);
+					if (document.referrer == value) {
+						log("Success: two values are equal.");
+						setAutoTestResult("J02", "PASS");
+					} else {
+						log("Error: document.referrer is different value.");
+						setAutoTestResult("J02", "FAIL");
+					}
+				} else {
+					log("Error: can't find 'document.referrer' value.");
+					setAutoTestResult("J02", "FAIL");
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<p>Please close this page and continue test.</p>
+</body>
+</html>

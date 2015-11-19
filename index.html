@@ -17,19 +17,20 @@
 
 
 		var tests = [
-			"A01", "A02", "A03", "A04", "A05", "A06", "A07",
-			"B01", "B02", "B03", "B04", "B05", "B06",
-			"C11", "C12", "C13", "C14",
+			["A01", "A02", "A03", "A04", "A05", "A06", "A07",],
+			["B01", "B02", "B03", "B04", "B05", "B06",],
+			["C11", "C12", "C13", "C14",
 			"C21", "C22", "C23",
 			"C31", "C32",
 			"C41", 
-			"C51",
-			"D01", "D02",
-			"E01", "E02",
-			"F01",
-			"G01",
-			"H01",
-			"I01",
+			"C51",],
+			["D01", "D02",],
+			["E01", "E02",],
+			["F01",],
+			["G01",],
+			["H01",],
+			["I01",],
+			["J01", "J02",],
 		];
 
 		// increase mVer when test item modified or deleted. (not added);
@@ -60,26 +61,50 @@
 		function showTestResult() {
 
 			var i;
-			var total = tests.length;
+			var j;
+			var total = 0;
+			var testGroupCount = tests.length;
 			var pass = 0;
 			var fail = 0;
 			var na = 0;
 			var nt = 0;
 
-			for (i = 0; i < total; ++i) {
-				var passFail = eval("localStorage." + tests[i]);
-				if (passFail == "PASS")
-					++pass;
-				else if (passFail == "FAIL")
-					++fail;
-				else if (passFail == "NA")
-					++na;
-				else if (passFail == "AUTO")
-					++nt;
-				else if (passFail == "NT")
-					++nt;
-				else 
-					++nt;
+			var testGroupResults = document.getElementsByClassName("testGroupResult");
+			if (testGroupResults.length != testGroupCount) {
+				alert("Error testGroupResult count mismatch. " + testGroupResults.length + ", " + testGroupCount);
+			}
+			for (i = 0; i < testGroupCount; ++i) {
+				var testGroup = tests[i];
+				var testGroupPass = 0;
+				var testGroupNa = 0;
+				for (j = 0; j < testGroup.length; ++j) {
+					total++;
+					var passFail = localStorage.getItem(testGroup[j]);
+					if (passFail == "PASS") {
+						++pass;
+						++testGroupPass;
+					} else if (passFail == "FAIL") {
+						++fail;
+					} else if (passFail == "NA") {
+						++na;
+						++testGroupNa;
+					} else if (passFail == "AUTO") {
+						++nt;
+					} else if (passFail == "NT") {
+						++nt;
+					} else {
+						++nt;
+					}
+				}
+
+				testGroupResults[i].innerHTML = "&#x2713;";
+				if (testGroupPass == (testGroup.length - testGroupNa)) {
+
+				} else {
+					testGroupResults[i].style.color = "rgba(0,0,0,0)";
+				}
+				//testGroupResults[i].innerHTML = parseInt(((testGroupPass) / (testGroup.length - testGroupNa) * 1000), 10) / 10 + "% pass";
+
 			}
 			document.getElementById("totalCount").innerHTML = total;
 			document.getElementById("passCount").innerHTML = pass;
@@ -96,20 +121,23 @@
 			//coverage.innerHTML = parseInt(((pass + fail) / (total - na) * 1000), 10) / 10 + "% (" + (pass + fail) + "/" + (total - na) + ")";
 			var passed = document.getElementById("passed");
 			passed.innerHTML = parseInt(((pass) / (total - na) * 1000), 10) / 10 + "% (" + (pass) + "/" + (total - na) + ")";
+
 		}
 
 		function reset() {
 			var i;
-			var total = tests.length;
-			for (i = 0; i < total; ++i) {
-				var id = tests[i];
-				localStorage.removeItem(id);
-				var passFail = getDefault(id);
-				if (passFail != null) {
-					eval("localStorage." + id + "= '" + passFail + "'");
+			var testGroupCount = tests.length;
+			for (i = 0; i < testGroupCount; ++i) {
+				var testGroup = tests[i];
+				var j;
+				for (j = 0; j < testGroup.length; ++j) {
+					var id = testGroup[j];
+					localStorage.removeItem(id);
+					var passFail = getDefault(id);
+					if (passFail != null) {
+						localStorage.setItem(id, passFail);
+					}
 				}
-
-				//eval("localStorage." + tests[i] + "= null");
 			}
 		}
 
@@ -127,7 +155,7 @@
 <body >
 	<h3>HybridApp WebView Test <span class="note"> for Android, iOS</span>
 	<span class="note" style="text-align :right; width:100%; display:table">
-		rev 3. 2015/11/18
+		rev 5. 2015/11/19
 	</span>
 	</h3>
 	<hr/>
@@ -139,36 +167,38 @@
 		<li>
 			HTML Tags
 			<div class="menuItem">
-				A. <a href="links.htm">Links</a>
+				<span class="testGroupResult"></span> <span class="index">A.</span> <a href="links.htm">Links</a>
 			</div>
 			<div class="menuItem">
-				B. <a href="fileUpload.htm">File upload</a>
+				<span class="testGroupResult"></span> <span class="index">B.</span> <a href="fileUpload.htm">File upload</a>
 			</div>
 			<div class="menuItem">
-				C. <a href="fileDownload.htm">File download</a>
+				<span class="testGroupResult"></span> <span class="index">C.</span> <a href="fileDownload.htm">File download</a>
 			</div>
 			<div class="menuItem">
-				D. <a href="video.htm">Video play</a>
+				<span class="testGroupResult"></span> <span class="index">D.</span> <a href="video.htm">Video play</a>
 			</div>
 		</li>
 		<li>
 			JavaScript Objects
 			<div class="menuItem">
-				E. <a href="alert.htm">Alert dialog</a>
+				<span class="testGroupResult"></span> <span class="index">E.</span> <a href="alert.htm">Alert dialog</a>
 			</div>
 			<div class="menuItem">
-				F. <a href="localStorage.htm">Local storage</a>
+				<span class="testGroupResult"></span> <span class="index">F.</span> <a href="localStorage.htm">Local storage</a>
 			</div>
 			<div class="menuItem">
-				G. <a href="location.htm">Location</a>
+				<span class="testGroupResult"></span> <span class="index">G.</span> <a href="location.htm">Location</a>
 			</div>
 			<div class="menuItem">
-				H. <a href="userMedia.htm">User Media</a>
+				<span class="testGroupResult"></span> <span class="index">H.</span> <a href="userMedia.htm">User Media</a>
 			</div>
 			<div class="menuItem">
-				I. <a href="vibration.htm">Vibration</a>
+				<span class="testGroupResult"></span> <span class="index">I.</span> <a href="vibration.htm">Vibration</a>
 			</div>
-			</ul>
+			<div class="menuItem">
+				<span class="testGroupResult"></span> <span class="index">J.</span> <a href="windowOpen.htm">Window open</a>
+			</div>
 		</li>
 	</ul>
 
