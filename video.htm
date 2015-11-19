@@ -7,6 +7,11 @@
 	<link rel="stylesheet" href="common.css">
 	<script type="text/javascript" src="common.js"></script>
 	<script type="text/javascript">
+
+		function onInit() {
+			setAutoTest("D02");
+		}
+
 		function test() {
 		}
 
@@ -27,6 +32,7 @@
 				video.webkitEnterFullscreen();
 			} else {
 				log("Error : can't find 'video.requestFullScreen' function");
+				setAutoTestResult("D02", "FAIL");
 				return;
 			}
 
@@ -45,10 +51,13 @@
 			});
 
 			window.setTimeout(function () {
-				if (isFullScreen)
-					log("Success to Switch full screen.");
-				else
+				if (isFullScreen) {
+					log("Success to switch full screen mode.");
+					setAutoTestResult("D02", "PASS");
+				} else {
 					log("Error : fail to request full screen.");
+					setAutoTestResult("D02", "FAIL");
+				}
 			}, 1000);
 			video.play();
 		}

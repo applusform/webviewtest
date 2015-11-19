@@ -27,11 +27,13 @@
 
 					function (err) {
 						log('Error: ' + err.name);
+						setAutoTestResult("H01", "FAIL");
 					}
 				);
 
 			} else {
 				log("Error : can't find 'navigator.getUserMedia()' function");
+				setAutoTestResult("H01", "FAIL");
 			}
 		}
 	</script>
@@ -49,7 +51,7 @@
 				</video>
 			</div>
 		</div>
-		<div class="note"><span class="noteTitle">Note: </span>N/A in below Android 5.0 or iOS. </div>
+		<div class="note"><span class="noteTitle">Note: </span>Not supported in below Android 5.0 or iOS. </div>
 	</div>
 </body>
 </html>

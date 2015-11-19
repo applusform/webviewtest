@@ -7,6 +7,10 @@
 	<link rel="stylesheet" href="common.css">
 	<script type="text/javascript" src="common.js"></script>
 	<script type="text/javascript">
+		function onInit() {
+			setAutoTest("E01");
+			setAutoTest("E02");
+		}
 		function test_Alert() {
 			log("Start test_Alert()");
 
@@ -19,11 +23,14 @@
 
 				if (diff < 100) {
 					log("Error : alert dialog is not shown or it does not support blocking mode.");
+					setAutoTestResult("E01", "FAIL");
 				} else {
 					log("End test_Alert()");
+					setAutoTestResult("E01", "PASS");
 				}
 			} catch (e) {
 				log("Error : " + e.message);
+				setAutoTestResult("E01", "FAIL");
 			}
 		}
 
@@ -42,12 +49,15 @@
 
 				if (diff < 100) {
 					log("Error : confirm dialog is not shown or it does not support blocking mode.");
+					setAutoTestResult("E02", "FAIL");
 				} else {
 					log("Confirm result : " + result);
 					log("End test_Confirm()");
+					setAutoTestResult("E02", "PASS");
 				}
 			} catch (e) {
 				log("Error : " + e.message);
+				setAutoTestResult("E02", "FAIL");
 			}
 		}
 	</script>

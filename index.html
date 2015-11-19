@@ -33,13 +33,15 @@
 		];
 
 		// increase mVer when test item modified or deleted. (not added);
-		var mVer = 3;
+		var mVer = 4;
 		function onInit() {
-			if (typeof (localStorage) != "undefined") {
+			document.getElementById("scriptDisabled").style.display = "none";
+
+			if (typeof (localStorage) != "undefined" && localStorage != null) {
 				if (localStorage.mVer) {
 					if (localStorage.mVer != mVer) {
 						localStorage.mVer = mVer;
-						if (confirm("Some Tests are modified or delete.\nReset all test result?")) {
+						if (confirm("Some Tests are modified or deleted.\nReset all test result?")) {
 							reset();
 						}
 					}
@@ -48,6 +50,8 @@
 					localStorage.mVer = mVer;
 					reset();
 				}
+			} else {
+				log("Error : can't find 'localStorage' object.");
 			}
 
 			showTestResult();
@@ -70,6 +74,10 @@
 					++fail;
 				else if (passFail == "NA")
 					++na;
+				else if (passFail == "AUTO")
+					++nt;
+				else if (passFail == "NT")
+					++nt;
 				else 
 					++nt;
 			}
@@ -84,8 +92,8 @@
 			}
 
 
-			var coverage = document.getElementById("coverage");
-			coverage.innerHTML = parseInt(((pass + fail) / (total - na) * 1000), 10) / 10 + "% (" + (pass + fail) + "/" + (total - na) + ")";
+			//var coverage = document.getElementById("coverage");
+			//coverage.innerHTML = parseInt(((pass + fail) / (total - na) * 1000), 10) / 10 + "% (" + (pass + fail) + "/" + (total - na) + ")";
 			var passed = document.getElementById("passed");
 			passed.innerHTML = parseInt(((pass) / (total - na) * 1000), 10) / 10 + "% (" + (pass) + "/" + (total - na) + ")";
 		}
@@ -116,70 +124,70 @@
 		document.useCustomHeader = true;
 	</script>
 </head>
-<body onload="onInit()">
+<body >
 	<h3>HybridApp WebView Test <span class="note"> for Android, iOS</span>
 	<span class="note" style="text-align :right; width:100%; display:table">
 		rev 3. 2015/11/18
 	</span>
 	</h3>
 	<hr/>
+	<div id="scriptDisabled" style="color:#ff0000;font-weight:bold;">Error : JavaScript is disabled.</div>
 	<ul>
 		<li>
 			<a href="basicInfo.htm"> Basic information</a>
 		</li>
 		<li>
 			HTML Tags
-			<ul>
-				<li>
-					<a href="links.htm"> A. Links</a>
-				</li>
-				<li>
-					<a href="fileUpload.htm"> B. File upload</a>
-				</li>
-				<li>
-					<a href="fileDownload.htm"> C. File download</a>
-				</li>
-				<li>
-					<a href="video.htm">D. Video play</a>
-				</li>
-			</ul>
+			<div class="menuItem">
+				A. <a href="links.htm">Links</a>
+			</div>
+			<div class="menuItem">
+				B. <a href="fileUpload.htm">File upload</a>
+			</div>
+			<div class="menuItem">
+				C. <a href="fileDownload.htm">File download</a>
+			</div>
+			<div class="menuItem">
+				D. <a href="video.htm">Video play</a>
+			</div>
 		</li>
 		<li>
 			JavaScript Objects
-			<ul>
-				<li>
-					<a href="alert.htm"> E. Alert dialog</a>
-				</li>
-				<li>
-					<a href="localStorage.htm"> F. Local storage</a>
-				</li>
-				<li>
-					<a href="location.htm">G. Location</a>
-				</li>
-				<li>
-					<a href="userMedia.htm">H. User Media (Android 5.0)</a>
-				</li>
-				<li>
-					<a href="vibration.htm">I. Vibration (Android 4.4)</a>
-				</li>
+			<div class="menuItem">
+				E. <a href="alert.htm">Alert dialog</a>
+			</div>
+			<div class="menuItem">
+				F. <a href="localStorage.htm">Local storage</a>
+			</div>
+			<div class="menuItem">
+				G. <a href="location.htm">Location</a>
+			</div>
+			<div class="menuItem">
+				H. <a href="userMedia.htm">User Media</a>
+			</div>
+			<div class="menuItem">
+				I. <a href="vibration.htm">Vibration</a>
+			</div>
 			</ul>
 		</li>
 	</ul>
 
 	<hr />
-	<span>
+	<span style="display:none;">
 	Result: <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:showTestResult()" >refresh </a> --> 
-	</span>
 	<br />
+	</span>
 	<div class="result">
 	- Passed : <span class="emp1" id="passed"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="resetConfirm()">reset</button><br /> 
+	<!-- 
 	- Coverage : <span class="emp1" id="coverage"></span> <br />
+	-->
 	- Total : <span class="emp1" id="totalCount"></span> <br />
 	<br />
 	<div class="passFail" style="display:inline-block;float:none;background:#a0ff80;">PASS</div> : <span class="emp1" id="passCount"></span><br />
 	<div class="passFail" style="display:inline-block;float:none;background:#ffa0a0;">FAIL</div> : <span class="emp1" id="failCount"></span><br />
-	<div class="passFail" style="display:inline-block;float:none;background:#ffffa0;">N/T</div> : <span class="emp1" id="ntCount"></span> (Not Tested yet.)<br />
-	<div class="passFail" style="display:inline-block;float:none;background:#a0a0a0;">N/A</div> : <span class="emp1" id="naCount"></span> (Not Applicable on this device.)<br />
+	<div class="passFail" style="display:inline-block;float:none;background:#ffffa0;">N/T</div> : <span class="emp1" id="ntCount"></span> (Not Tested yet. Select test decision manually.)<br />
+	<div class="passFail" style="display:inline-block;float:none;background:#a0a0a0;">N/A</div> : <span class="emp1" id="naCount"></span> (Not Applicable on this OS.)<br />
 	</div>
 
 </body>

@@ -48,7 +48,10 @@ function processPassFailButton() {
 }
 
 function changePassFailStatus(element) {
-    var passFail = eval("localStorage." + element.id);
+    if (!localStorage)
+        return;
+
+    var passFail = localStorage.getItem(element.id);
     if (passFail == "PASS") {
         passFail = "FAIL";
     } else if (passFail == "FAIL") {
@@ -58,8 +61,24 @@ function changePassFailStatus(element) {
     } else {
         passFail = "PASS";
     }
-    eval("localStorage." + element.id + "= '" + passFail + "'");
+    localStorage.setItem(element.id, passFail);
     updatePassFailStatus(element.id)
+}
+
+function setAutoTest(id) {
+    var passFail = localStorage.getItem(id);
+    if (passFail == null) {
+        localStorage.setItem(id, "AUTO");
+        updatePassFailStatus(id);
+    }
+}
+
+function setAutoTestResult(id, result) {
+    var passFail = localStorage.getItem(id);
+    if (passFail == "AUTO" || passFail == null) {
+        localStorage.setItem(id, result);
+        updatePassFailStatus(id);
+    }
 }
 
 function isAndroid() {
@@ -80,35 +99,34 @@ function getAndroidVersion() {
 var androidVersion = parseFloat(getAndroidVersion());
 
 function getDefault(id) {
-    if (id == "A04" || id == "A06") {
-        if (!isAndroid)
+    if (id == "A04" || id == "A06" || id == "A05") {
+        if (isiOS)
             return "NA";
     } else if (id == "A07") {
-        if (!isiOS)
+        if (isAndroid)
             return "NA";
     } else if (id == "H01") {
         if (isiOS)
             return "NA";
-        if (isAndroid && androidVersion < 5.0)
-            return "NA";
     } else if (id == "I01") {
         if (isiOS)
-            return "NA";
-        if (isAndroid && androidVersion < 4.4)
             return "NA";
     }
 
 }
 
 function updatePassFailStatus(id) {
+    if (!localStorage)
+        return;
+
     var passFail = "NT";
     var element = document.getElementById(id);
     if (element != null) {
-        passFail = eval("localStorage." + id);
+        passFail = localStorage.getItem(id);
         if (passFail == null) {
             passFail = getDefault(id);
             if (passFail != null) {
-                eval("localStorage." + id + "= '" + passFail + "'");
+                localStorage.setItem(id, passFail);
             }
         }
         if (passFail == "PASS") {
@@ -120,6 +138,9 @@ function updatePassFailStatus(id) {
         } else if (passFail == "NA") {
             element.innerHTML = "N/A";
             element.style.background = "#a0a0a0";
+        } else if (passFail == "AUTO") {
+            element.innerHTML = "AUTO";
+            element.style.background = "#ffff80";
         } else {
             element.innerHTML = "N/T";
             element.style.background = "#ffffa0";
@@ -138,6 +159,11 @@ function onDOMContentLoaded() {
     }
 
     processPassFailButton();
+
+    if (typeof (onInit) == "function") {
+        onInit();
+    }
+
 }
 
 //window.addEventListener('load', wrapBody, false)

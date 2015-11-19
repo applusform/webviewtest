@@ -11,7 +11,7 @@
 			log("Start test()");
 			var date = new Date();
 			document.getElementById("currentDate").innerHTML = date;
-			if (typeof (localStorage) != "undefined") {
+			if (typeof (localStorage) != "undefined" && localStorage != null) {
 				log("Found localStorage object.");
 				log("Reading saved date from localStorage...");
 				var lastDate = localStorage.lastDate;
@@ -23,6 +23,9 @@
 					document.getElementById("lastDate").innerHTML = lastDate;
 					log("End test()");
 				}
+			} else {
+				log("Error : can't find 'localStorage' object");
+				setAutoTestResult("F01", "FAIL");
 			}
 		}
 	</script>

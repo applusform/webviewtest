@@ -9,6 +9,10 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript">
 		var handled;
+
+		function onInit() {
+			setAutoTest("G01");
+		}
 		function test() {
 			handled = false;
 			log("Start test()");
@@ -19,12 +23,15 @@
 				navigator.geolocation.getCurrentPosition(showPosition, function (e) { handled = true; log("Error: " + e.message) }, { timeout: timeOutSec * 1000 });
 
 				window.setTimeout(function () {
-					if (!handled) 
+					if (!handled) {
 						log("Error : Timeout.");
-				 }, (timeOutSec + 3) * 1000);
+						setAutoTestResult("G01", "FAIL");
+					}
+				}, (timeOutSec + 3) * 1000);
 			}
 			else {
 				log("Error : can't find 'navigator.geolocation' object");
+				setAutoTestResult("G01", "FAIL");
 			}
 		}
 
@@ -50,11 +57,14 @@
 					}
 					log("Found " + results.length + " addresses." + addresses);
 
+					setAutoTestResult("G01", "PASS");
+
 
 					document.getElementById("address").innerHTML = results[0].formatted_address;
 				}
 				else {
 					log("Geocoder failed due to: " + status);
+					setAutoTestResult("G01", "FAIL");
 				}
 				log("End test()");
 			});
