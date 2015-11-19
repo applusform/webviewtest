@@ -148,6 +148,14 @@ function updatePassFailStatus(id) {
     }
 }
 
+function strEnKo(strEn, strKo) {
+    var lang = navigator.language || navigator.userLanguage;
+    if (lang.indexOf("ko") == 0) {
+        return strKo;
+    }
+    return strEn;
+}
+
 function onDOMContentLoaded() {
     if (!document.useCustomHeader)
         addHeader();
