@@ -96,6 +96,93 @@ function getAndroidVersion() {
     return match ? match[1] : 0;
 };
 
+function getiOSVersion() {
+    var ua = navigator.userAgent;
+    var match = ua.match(/OS\s([0-9\.\_]*)/);
+    return match ? match[1].replace("_", ".") : 0;
+};
+
+function getAndroidCodeNmae(ver) {
+    // https://source.android.com/source/build-numbers.html
+
+    var val = parseFloat(ver);
+    if (val >= 7)
+        return ""; // unknwon
+    if (val >= 6)
+        return "Marshmallow";
+    if (val >= 5)
+        return "Lollipop";
+    if (val >= 4.4)
+        return "KitKat";
+    if (val >= 4.1)
+        return "JellyBean";
+    if (val >= 4.0)
+        return "Ice Cream Sandwich";
+    if (val >= 3.0)
+        return "Honeycomb";
+    if (val >= 2.3)
+        return "Gingerbread";
+    if (val >= 2.2)
+        return "Froyo";
+    if (val >= 2.0)
+        return "Eclair";
+    if (val >= 1.6)
+        return "Donut";
+    if (val >= 1.5)
+        return "Cupcake";
+    return ""; // no code name
+}
+function getAgentKnownName() {
+    var name = "Unknown";
+    var ua = navigator.userAgent;
+    var idx;
+
+    if (ua.indexOf("Android") >= 0) {
+        name = "Android";
+        var version = getAndroidVersion();
+        if (version != 0) {
+            name += " " + version;
+            var codeName = getAndroidCodeNmae(version);
+            if (codeName != "") {
+                name += " (" + codeName + ")";
+            }
+        }
+    } else if (ua.indexOf("iPhone") >= 0 || ua.indexOf("iPad") >= 0 || ua.indexOf("iPod") >= 0) {
+        name = "iOS";
+        var version = getiOSVersion();
+        if (version != 0) {
+            name += " " + version;
+        }
+        var isWebKit = ua.indexOf("Safari") < 0;
+
+        if (isWebKit) {
+            if (window.indexedDB)
+                name += " (WKWebView)";
+            else
+                name += " (UIWebView)";
+        } else {
+            name += " (Safari)";
+        }
+    } else if ((idx = ua.indexOf('MSIE ')) >= 0) {
+        name = "Microsoft Internet Explorer " + parseInt(ua.substring(idx + 5, ua.indexOf('.', idx)), 10);
+    } else if ((idx = ua.indexOf('Trident/')) >= 0) {
+        var rv = ua.indexOf('rv:');
+        name = "Microsoft Internet Explorer " + parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    } else if ((idx = ua.indexOf('Edge/')) >= 0) {
+        name = "Microsoft Internet Explorer " + parseInt(ua.substring(idx + 5, ua.indexOf('.', idx)), 10);
+    } else if (typeof InstallTrigger !== 'undefined') {
+        name = "Firefox";
+    } else if (!!window.opera || ua.indexOf(' OPR/') >= 0) {
+        name = "Opera";
+    } else if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+        name = "Safari";
+    } else if (!!window.chrome) {
+        name = "Chrome";
+    } 
+
+    return name;
+}
+
 var androidVersion = parseFloat(getAndroidVersion());
 
 function getDefault(id) {
@@ -112,7 +199,6 @@ function getDefault(id) {
         if (isiOS)
             return "NA";
     }
-
 }
 
 function updatePassFailStatus(id) {
