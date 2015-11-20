@@ -22,7 +22,7 @@
 			localStorage.setItem("testOpenNewWindow", "ready");
 			window.setTimeout(function () {
 				checkTestOpenNewWindow();
-			}, 1000);
+			}, 2000);
 
 			window.open("testOpenNewWindow.htm", "_blank");
 		}
@@ -31,39 +31,22 @@
 			var testOpenNewWindow = localStorage.getItem("testOpenNewWindow");
 			if (testOpenNewWindow == "ready") {
 				setAutoTestResult("J01", "FAIL");
-				updatePassFailStatus("J01");
 			}
+			updatePassFailStatus("J01");
 		}
 
 		function testReferrer() {
-			localStorage.setItem("testReferrer", document.location);
-			window.open("testReferrer.htm", "_blank");
 			window.setTimeout(function () {
 				updatePassFailStatus("J02");
-			}, 1000);
-		}
+			}, 2000);
 
-		function vibrate(pattern) {
-			if (navigator.vibrate) {
-				var millis = 0;
-				if (typeof (pattern) == "number") {
-					millis = pattern;
-					log("Vibrate " + millis + " milliseconds.");
-				} else {
-					for (var i = 0; i < pattern.length; ++i) {
-						millis += pattern[i];
-					}
-					log("Vibrate patterns (total " + millis + " milliseconds).");
-				}
-				navigator.vibrate(pattern);
-				window.setTimeout(function () {
-					log("End vibration.");
-				}, millis);
-			}
-			else {
-				log("Error : can't find 'navigator.vibrate' function");
-				setAutoTestResult("I01", "FAIL");
-			}
+			localStorage.setItem("testReferrer", document.location);
+			var referLink = document.createElement('a');
+			referLink.href = "testReferrer.htm";
+			referLink.target = "_blank";
+			document.body.appendChild(referLink);
+			referLink.click();
+
 		}
 	</script>
 </head>
