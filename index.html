@@ -145,7 +145,8 @@
 		}
 
 		function resetConfirm() {
-			if (confirm("Delete all test results.\nAre you sure?")) {
+			var time = new Date();
+			if (confirm("Delete all test results.\nAre you sure?") || (new Date() - time) < 100) {
 				reset();
 				showTestResult();
 			}
