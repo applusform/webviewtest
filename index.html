@@ -37,12 +37,17 @@
 		var mVer = 4;
 		function onInit() {
 			document.getElementById("scriptDisabled").style.display = "none";
+			document.getElementById("info").innerHTML = getAgentKnownName();
 
+			showTestResult();
+		}
+
+		function test() {
 			if (typeof (localStorage) != "undefined" && localStorage != null) {
 				if (localStorage.mVer) {
 					if (localStorage.mVer != mVer) {
 						localStorage.mVer = mVer;
-						if (confirm("Some Tests are modified or deleted.\nReset all test result?")) {
+						if (confirm("Test items are Updated.\nReset all test result?")) {
 							reset();
 						}
 					}
@@ -54,11 +59,6 @@
 			} else {
 				log("Error : can't find 'localStorage' object.");
 			}
-
-
-			document.getElementById("info").innerHTML = getAgentKnownName();
-
-			showTestResult();
 		}
 
 		function showTestResult() {
