@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>HTTPS site Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" charset="utf-8" />
+	<link rel="stylesheet" href="common.css">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+
+		function onInit() {
+		}
+
+		function test() {
+
+		}
+	</script>
+</head>
+<body>
+	<div class="subject1">
+	HTTPS Root Certificate Authority</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">HS01. Certificated by VeriSign</span>
+			<div id="HS01" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent" >
+			<p>
+				<a href="https://www.verisign.com" target="verisign" >https://www.verisign.com</a>
+			</p>
+			<div style="width:100%; height:200px; overflow:auto; -webkit-overflow-scrolling:touch;">
+				<iframe name="verisign" style="width:100%; height:100%;" src="https://www.verisign.com"> </iframe>
+			</div>
+		</div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">HS02. Certificated by CA Cert</span>
+			<div id="HS02" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent" >
+			<p>
+				<a href="https://www.cacert.org" target="cacert" >https://www.cacert.org</a>
+			</p>
+			<div style="width:100%;height:200px;overflow: auto; -webkit-overflow-scrolling:touch;">
+				<iframe name="cacert" style="width:100%;height:200px;" src="https://www.cacert.org"> </iframe>
+			</div>
+		</div>
+	</div>
+	<div class="box1">
+		<div class="itemHeader">
+			<span class="itemTitle">HS03. Certificated by StartCom</span>
+			<div id="HS03" class="passFail">
+				N/T</div>
+		</div>
+		<div class="itemContent" >
+			<p>
+				<a href="https://www.startssl.com" target="startssl" >https://www.startssl.com</a>
+			</p>
+			<div style="width:100%;height:200px;overflow: auto; -webkit-overflow-scrolling:touch;">
+				<iframe name="startssl" style="width:100%;height:200px;" src="https://www.startssl.com"> </iframe>
+			</div>
+		</div>
+	</div>
+	
+	<div class="guide">
+		<script type="text/javascript">
+			document.write(strEnKo("", "- 페이지 로딩에 성공한 항목은 PASS를 선택하십시오."))
+		</script>
+	</div>	
+</body>
+</html>

@@ -186,16 +186,16 @@ function getAgentKnownName() {
 var androidVersion = parseFloat(getAndroidVersion());
 
 function getDefault(id) {
-    if (id == "A04" || id == "A06" || id == "A05") {
+    if (id == "LK04" || id == "LK06" || id == "LK05") {
         if (isiOS)
             return "NA";
-    } else if (id == "A07") {
+    } else if (id == "LK07") {
         if (isAndroid)
             return "NA";
-    } else if (id == "H01") {
+    } else if (id == "UM01") {
         if (isiOS)
             return "NA";
-    } else if (id == "I01") {
+    } else if (id == "VB01") {
         if (isiOS)
             return "NA";
     }

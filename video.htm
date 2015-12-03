@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 
 		function onInit() {
-			setAutoTest("D02");
+			setAutoTest("VD02");
 		}
 
 		function test() {
@@ -53,10 +53,10 @@
 			window.setTimeout(function () {
 				if (isFullScreen) {
 					log("Success to switch full screen mode.");
-					setAutoTestResult("D02", "PASS");
+					setAutoTestResult("VD02", "PASS");
 				} else {
 					log("Error : fail to request full screen.");
-					setAutoTestResult("D02", "FAIL");
+					setAutoTestResult("VD02", "FAIL");
 				}
 			}, 1000);
 			video.play();
@@ -71,8 +71,8 @@
 <body>
 	<div class="box1">
 		<div class="itemHeader">
-			<span class="itemTitle">D01. Inline play</span>
-			<div id="D01" class="passFail">
+			<span class="itemTitle">VD01. Inline play</span>
+			<div id="VD01" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent">
@@ -83,8 +83,8 @@
 	</div>
 	<div class="box1">
 		<div class="itemHeader">
-			<span class="itemTitle">D02. Full screen play</span>
-			<div id="D02" class="passFail">
+			<span class="itemTitle">VD02. Full screen play</span>
+			<div id="VD02" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent">

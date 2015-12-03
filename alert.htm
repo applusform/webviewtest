@@ -8,8 +8,8 @@
 	<script type="text/javascript" src="common.js"></script>
 	<script type="text/javascript">
 		function onInit() {
-			setAutoTest("E01");
-			setAutoTest("E02");
+			setAutoTest("AD01");
+			setAutoTest("AD02");
 		}
 		function test_Alert() {
 			log("Start test_Alert()");
@@ -23,14 +23,14 @@
 
 				if (diff < 100) {
 					log("Error : alert dialog is not shown or it does not support blocking mode.");
-					setAutoTestResult("E01", "FAIL");
+					setAutoTestResult("AD01", "FAIL");
 				} else {
 					log("End test_Alert()");
-					setAutoTestResult("E01", "PASS");
+					setAutoTestResult("AD01", "PASS");
 				}
 			} catch (e) {
 				log("Error : " + e.message);
-				setAutoTestResult("E01", "FAIL");
+				setAutoTestResult("AD01", "FAIL");
 			}
 		}
 
@@ -49,15 +49,15 @@
 
 				if (diff < 100) {
 					log("Error : confirm dialog is not shown or it does not support blocking mode.");
-					setAutoTestResult("E02", "FAIL");
+					setAutoTestResult("AD02", "FAIL");
 				} else {
 					log("Confirm result : " + result);
 					log("End test_Confirm()");
-					setAutoTestResult("E02", "PASS");
+					setAutoTestResult("AD02", "PASS");
 				}
 			} catch (e) {
 				log("Error : " + e.message);
-				setAutoTestResult("E02", "FAIL");
+				setAutoTestResult("AD02", "FAIL");
 			}
 		}
 	</script>
@@ -66,7 +66,7 @@
 	<div class="box1">
 		<div class="itemHeader">
 			<span class="itemTitle">E01. Alert</span>
-			<div id="E01" class="passFail">
+			<div id="AD01" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent">
@@ -76,7 +76,7 @@
 	<div class="box1">
 		<div class="itemHeader">
 			<span class="itemTitle">E02. Confirm</span>
-			<div id="E02" class="passFail">
+			<div id="AD02" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent">

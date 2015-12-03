@@ -17,24 +17,25 @@
 
 
 		var tests = [
-			["A01", "A02", "A03", "A04", "A05", "A06", "A07",],
-			["B01", "B02", "B03", "B04", "B05", "B06",],
-			["C11", "C12", "C13", "C14",
-			"C21", "C22", "C23",
-			"C31", "C32",
-			"C41", 
-			"C51",],
-			["D01", "D02",],
-			["E01", "E02",],
-			["F01",],
-			["G01",],
-			["H01",],
-			["I01",],
-			["J01", "J02",],
+			["LK01", "LK02", "LK03", "LK04", "LK05", "LK06", "LK07",],
+			["FU01", "FU02", "FU03", "FU04", "FU05", "FU06",],
+			["FD11", "FD12", "FD13", "FD14",
+			"FD21", "FD22", "FD23",
+			"FD31", "FD32",
+			"FD41", 
+			"FD51",],
+			["HS01", "HS02", "HS03",],
+			["VD01", "VD02",],
+			["AD01", "AD02",],
+			["LS01",],
+			["GL01",],
+			["UM01",],
+			["VB01",],
+			["WO01", "WO02",],
 		];
 
 		// increase mVer when test item modified or deleted. (not added);
-		var mVer = 4;
+		var mVer = 5;
 		function onInit() {
 			document.getElementById("scriptDisabled").style.display = "none";
 			document.getElementById("info").innerHTML = getAgentKnownName();
@@ -159,7 +160,7 @@
 <body >
 	<h3>HybridApp WebView Test <span class="note"> for Android, iOS</span>
 	<span class="note" style="text-align :right; width:100%; display:table">
-		rev 7. 2015/11/20
+		rev 8. 2015/12/01
 	</span>
 	</h3>
 	<hr/>
@@ -171,37 +172,40 @@
 		<li>
 			HTML Tags
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">A.</span> <a href="links.htm">Links</a>
+				<span class="testGroupResult"></span> <span class="index">LK.</span> <a href="links.htm">Links</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">B.</span> <a href="fileUpload.htm">File upload</a>
+				<span class="testGroupResult"></span> <span class="index">FU.</span> <a href="fileUpload.htm">File upload</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">C.</span> <a href="fileDownload.htm">File download</a>
+				<span class="testGroupResult"></span> <span class="index">FD.</span> <a href="fileDownload.htm">File download</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">D.</span> <a href="video.htm">Video play</a>
+				<span class="testGroupResult"></span> <span class="index">HS.</span> <a href="https.htm">HTTPS site</a>
+			</div>
+			<div class="menuItem">
+				<span class="testGroupResult"></span> <span class="index">VD.</span> <a href="video.htm">Video play</a>
 			</div>
 		</li>
 		<li>
 			JavaScript Objects
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">E.</span> <a href="alert.htm">Alert dialog</a>
+				<span class="testGroupResult"></span> <span class="index">AD.</span> <a href="alert.htm">Alert dialog</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">F.</span> <a href="localStorage.htm">Local storage</a>
+				<span class="testGroupResult"></span> <span class="index">LS.</span> <a href="localStorage.htm">Local storage</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">G.</span> <a href="location.htm">Location</a>
+				<span class="testGroupResult"></span> <span class="index">GL.</span> <a href="location.htm">Geo Location</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">H.</span> <a href="userMedia.htm">User Media</a>
+				<span class="testGroupResult"></span> <span class="index">UM.</span> <a href="userMedia.htm">User Media</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">I.</span> <a href="vibration.htm">Vibration</a>
+				<span class="testGroupResult"></span> <span class="index">VB.</span> <a href="vibration.htm">Vibration</a>
 			</div>
 			<div class="menuItem">
-				<span class="testGroupResult"></span> <span class="index">J.</span> <a href="windowOpen.htm">Window open</a>
+				<span class="testGroupResult"></span> <span class="index">WO.</span> <a href="windowOpen.htm">Window open</a>
 			</div>
 		</li>
 	</ul>

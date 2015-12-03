@@ -9,8 +9,8 @@
 	<script type="text/javascript">
 
 		function onInit() {
-			setAutoTest("J01");
-			setAutoTest("J02");
+			setAutoTest("WO01");
+			setAutoTest("WO02");
 		}
 
 		function test() {
@@ -29,14 +29,14 @@
 		function checkTestOpenNewWindow() {
 			var testOpenNewWindow = localStorage.getItem("testOpenNewWindow");
 			if (testOpenNewWindow == "ready") {
-				setAutoTestResult("J01", "FAIL");
+				setAutoTestResult("WO01", "FAIL");
 			}
-			updatePassFailStatus("J01");
+			updatePassFailStatus("WO01");
 		}
 
 		function testReferrer() {
 			window.setTimeout(function () {
-				updatePassFailStatus("J02");
+				updatePassFailStatus("WO02");
 			}, 1000);
 
 			localStorage.setItem("testReferrer", document.location);
@@ -46,20 +46,20 @@
 <body>
 	<div class="box1">
 		<div class="itemHeader">
-			<span class="itemTitle">J01. open new window</span>
-			<div id="J01" class="passFail">
+			<span class="itemTitle">WO01. open new window</span>
+			<div id="WO01" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent" >
 			<p>
-				<button onclick="testOpenNewWindow()" >test open target="_blank"</button>
+				<a href="javascript:testOpenNewWindow()" >test open target="_blank"</a>
 			</p>
 		</div>
 	</div>
 	<div class="box1">
 		<div class="itemHeader">
-			<span class="itemTitle">J02. referrer</span>
-			<div id="J02" class="passFail">
+			<span class="itemTitle">WO02. referrer</span>
+			<div id="WO02" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent" >
@@ -68,9 +68,10 @@
 			</p>
 		</div>
 	</div>
+	
 	<div class="guide">
 		<script type="text/javascript">
-			document.write(strEnKo("", "- 버튼을 클릭하면 테스트 페이지가 새로 열립니다.<br/>- 페이지를 닫고 다시 돌아오십시오."))
+			document.write(strEnKo("", "- 링크를 클릭하면 테스트 페이지가 새로 열립니다.<br/>- 페이지를 닫고 다시 돌아오십시오."))
 		</script>
 	</div>	
 </body>

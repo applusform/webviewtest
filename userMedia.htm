@@ -27,13 +27,13 @@
 
 					function (err) {
 						log('Error: ' + err.name);
-						setAutoTestResult("H01", "FAIL");
+						setAutoTestResult("UM01", "FAIL");
 					}
 				);
 
 			} else {
 				log("Error : can't find 'navigator.getUserMedia()' function");
-				setAutoTestResult("H01", "FAIL");
+				setAutoTestResult("UM01", "FAIL");
 			}
 		}
 	</script>
@@ -41,8 +41,8 @@
 <body>
 	<div class="box1">
 		<div class="itemHeader">
-			<span class="itemTitle">H01. Audio/Video stream</span>
-			<div id="H01" class="passFail">
+			<span class="itemTitle">UM01. Audio/Video stream</span>
+			<div id="UM01" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent" style="width:100%">

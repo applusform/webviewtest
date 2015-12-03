@@ -11,7 +11,7 @@
 		var handled;
 
 		function onInit() {
-			setAutoTest("G01");
+			setAutoTest("GL01");
 		}
 		function test() {
 			handled = false;
@@ -25,13 +25,13 @@
 				window.setTimeout(function () {
 					if (!handled) {
 						log("Error : Timeout.");
-						setAutoTestResult("G01", "FAIL");
+						setAutoTestResult("GL01", "FAIL");
 					}
 				}, (timeOutSec + 3) * 1000);
 			}
 			else {
 				log("Error : can't find 'navigator.geolocation' object");
-				setAutoTestResult("G01", "FAIL");
+				setAutoTestResult("GL01", "FAIL");
 			}
 		}
 
@@ -57,14 +57,14 @@
 					}
 					log("Found " + results.length + " addresses." + addresses);
 
-					setAutoTestResult("G01", "PASS");
+					setAutoTestResult("GL01", "PASS");
 
 
 					document.getElementById("address").innerHTML = results[0].formatted_address;
 				}
 				else {
 					log("Geocoder failed due to: " + status);
-					setAutoTestResult("G01", "FAIL");
+					setAutoTestResult("GL01", "FAIL");
 				}
 				log("End test()");
 			});
@@ -74,8 +74,8 @@
 <body>
 	<div class="box1">
 		<div class="itemHeader">
-			<span class="itemTitle">G01. Location</span>
-			<div id="G01" class="passFail">
+			<span class="itemTitle">GL01. Location</span>
+			<div id="GLL01" class="passFail">
 				N/T</div>
 		</div>
 		<div class="itemContent">
